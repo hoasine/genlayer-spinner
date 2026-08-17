@@ -1,65 +1,66 @@
 # GenLayer Spinner
 
-Portal loading spinner for the **Design the GenLayer Spinner** mission.
+<div align="center">
 
-Built from the official GenLayer Portal mark — left wing, right wing, and center diamond — sourced from [`genlayer-portal-logo.svg`](https://portal.genlayer.foundation/assets/genlayer-portal-logo.svg). Wings stay fixed (never rotate or distort). An accent streak sweeps both wing edges with soft neon glow, while the diamond gently blinks between the mark color and the accent.
+## Portal Loading Mark for GenLayer
 
-**Author:** Hoa Tran Rom ([@hoasine](https://github.com/hoasine))
+| **GenLayer Spinner** |
+|---|
+| **Official Portal wings stay fixed. Neon edge sweep + soft diamond blink.** |
 
-| | |
-| --- | --- |
-| **X** | [https://x.com/HoaTranRom](https://x.com/HoaTranRom) |
-| **Discord** | `tranduchoa2407` |
-| **GitHub** | [https://github.com/hoasine](https://github.com/hoasine) |
-| **Live demo** | [https://genlayer-spinner-sigma.vercel.app](https://genlayer-spinner-sigma.vercel.app) |
+[![Live Demo](https://img.shields.io/badge/Live-genlayer--spinner--sigma.vercel.app-0f172a?style=for-the-badge&logo=vercel)](https://genlayer-spinner-sigma.vercel.app)
+[![Mission](https://img.shields.io/badge/Mission-Design_the_GenLayer_Spinner-ff6a33?style=for-the-badge)](#overview)
+[![Stack](https://img.shields.io/badge/Stack-HTML_+_CSS_+_JS-111827?style=for-the-badge)](#project-structure)
+[![Mark](https://img.shields.io/badge/Mark-Portal_Official_SVG-1f6feb?style=for-the-badge)](#design-principles)
+
+</div>
 
 ---
 
-## Features
+## Overview
 
-- Official Portal geometry (wings + diamond only)
-- Synchronized edge sweep on both wings (neon + soft glow, no white core)
-- Soft diamond blink (mark color ↔ accent)
-- Size tokens: `sm` · `md` · `lg` · `xl`
-- Dark surfaces via `data-tone="on-dark"`
-- Live timing and accent controls on the demo page
-- Public API: `setSpinnerTiming` · `setSpinnerAccent`
+GenLayer Spinner is a Portal-ready loading component for the **Design the GenLayer Spinner** mission.
 
-## Quick start
+It uses the official GenLayer Portal mark — left wing, right wing, and center diamond — cropped from [`genlayer-portal-logo.svg`](https://portal.genlayer.foundation/assets/genlayer-portal-logo.svg). Wings never rotate or distort. Motion is limited to:
 
-```html
-<link rel="stylesheet" href="./spinner.css" />
+1. A synchronized accent streak sweeping both wing edges (neon + soft glow)
+2. A soft diamond blink between mark color and Portal orange
 
-<span
-  data-gl-spinner
-  data-size="md"
-  aria-label="Loading"
-></span>
+## Core Value Proposition
 
-<script type="module" src="./spinner.js"></script>
-```
+- **Brand-safe geometry:** official Portal paths only
+- **No logo spin:** wings stay fixed; motion is stroke-based
+- **Readable at every size:** glow scales down for `sm` / `md`
+- **Configurable live:** speed and accent can be tuned on the demo page
+- **Drop-in usage:** one CSS file + one JS module + a `data-gl-spinner` host
 
-Run locally:
+## Design Principles
 
-```bash
-npx --yes serve .
-```
+1. **Keep the mark intact** — no rotation, skew, or fill distortion on the wings
+2. **Accent stays Portal orange by default** — `#FF6A33`
+3. **Edge sweep loops seamlessly** — soft ease-in-out, no pause between cycles
+4. **Diamond blink stays gentle** — black/light ↔ accent
+5. **Small sizes stay crisp** — blur/halo tokens scale with `data-size`
 
-Open the printed local URL, or open `index.html` directly.
+## Animation Flow
 
-## Options
+1. Mount host: `<span data-gl-spinner …>`
+2. Inject official SVG mark (wings + diamond + sweep strokes)
+3. Animate both wing edges with dashoffset (glow layer + neon layer)
+4. Soft-blink the diamond on its own period
+5. Optionally override timing/accent via attributes or `setSpinner*` helpers
 
-### Markup attributes
+## Markup API
 
 | Attribute | Values | Default | Description |
-| --- | --- | --- | --- |
+|-----------|--------|---------|-------------|
 | `data-size` | `sm` `md` `lg` `xl` | `md` | 24 / 48 / 72 / 128 px |
-| `data-tone` | `on-dark` | — | Light mark for dark backgrounds |
+| `data-tone` | `on-dark` | — | Light mark for dark surfaces |
 | `data-sweep-sec` | number (seconds) | `4.2` | Edge sweep loop duration |
 | `data-diamond-sec` | number (seconds) | `1.55` | Diamond blink period |
 | `data-accent` | `#rrggbb` | `#ff6a33` | Accent for streak + diamond |
 
-### JavaScript API
+## JavaScript API
 
 ```js
 import {
@@ -74,7 +75,7 @@ setSpinnerAccent("#ff6a33");
 remountAllSpinners();
 ```
 
-When loaded as a module on the demo page, the same helpers are available on `window`:
+Globals on the demo page:
 
 - `window.setSpinnerTiming`
 - `window.setSpinnerAccent`
@@ -83,41 +84,53 @@ When loaded as a module on the demo page, the same helpers are available on `win
 ## Defaults
 
 | Token | Value | Use |
-| --- | --- | --- |
+|-------|-------|-----|
 | Accent | `#FF6A33` | Edge neon/glow + diamond peak |
 | Void | `#1A1A1A` | Wings on light surfaces |
 | On dark | `#F5F5F5` | Wings on dark surfaces |
 | Sweep | `4.2s` | Full edge loop |
 | Diamond | `1.55s` | Soft blink period |
 
-Glow strength scales with spinner size so small marks stay crisp.
-
-## Project layout
+## Project Structure
 
 ```text
-genlayer-spinner/
-├── index.html      # Demo: preview, setup, examples
-├── spinner.css     # Styles + size/glow tokens
-├── spinner.js      # SVG mark, animation, public API
-├── mark.svg        # Static mark asset
-├── vercel.json     # Static deploy config
-└── README.md
+index.html      # Demo: preview, setup, examples
+spinner.css     # Styles + size/glow tokens
+spinner.js      # SVG mark, animation, public API
+mark.svg        # Static mark asset
+vercel.json     # Static deploy config
+README.md
 ```
 
-| Asset | Path |
-| --- | --- |
-| Demo page | [`index.html`](./index.html) |
-| Styles | [`spinner.css`](./spinner.css) |
-| Runtime | [`spinner.js`](./spinner.js) |
-| Mark | [`mark.svg`](./mark.svg) |
-
-## Deploy
-
-Repository: [hoasine/genlayer-spinner](https://github.com/hoasine/genlayer-spinner)
+## Local Development
 
 ```bash
-npx vercel --prod
+npx --yes serve .
 ```
+
+Open the printed local URL, or open `index.html` directly.
+
+### Drop-in snippet
+
+```html
+<link rel="stylesheet" href="./spinner.css" />
+
+<span
+  data-gl-spinner
+  data-size="md"
+  aria-label="Loading"
+></span>
+
+<script type="module" src="./spinner.js"></script>
+```
+
+## Links
+
+- Live demo: [https://genlayer-spinner-sigma.vercel.app](https://genlayer-spinner-sigma.vercel.app)
+- GitHub: [https://github.com/hoasine/genlayer-spinner](https://github.com/hoasine/genlayer-spinner)
+- X: [https://x.com/HoaTranRom](https://x.com/HoaTranRom)
+- Discord: `tranduchoa2407`
+- Author: Hoa Tran Rom ([@hoasine](https://github.com/hoasine))
 
 ## Notes
 
