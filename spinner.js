@@ -17,7 +17,7 @@ const MARK = `
 </svg>
 `;
 
-const DEFAULT_ACCENT = "#ff8b61";
+const DEFAULT_ACCENT = "#ff6a33";
 
 /** Global defaults — change live via setSpinnerTiming / setSpinnerAccent. */
 export const spinnerTiming = {

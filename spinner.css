@@ -1,7 +1,7 @@
 :root {
   --gl-void: #1a1a1a;
-  --gl-accent: #ff8b61;
-  --gl-accent-rgb: 255, 139, 97;
+  --gl-accent: #ff6a33;
+  --gl-accent-rgb: 255, 106, 51;
   --gl-orange: var(--gl-accent);
   --gl-peach: #ffe8d6;
   --gl-wash: #fff4ec;

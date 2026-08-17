@@ -6,11 +6,11 @@
     <title>GenLayer Spinner</title>
     <meta
       name="description"
-      content="Portal-ready GenLayer loading spinner: official mark, orange neon glow, soft diamond blink."
+      content="Portal-ready GenLayer loading spinner with neon edge sweep and soft diamond blink."
     />
     <link rel="icon" href="./mark.svg" type="image/svg+xml" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <link rel="stylesheet" href="./spinner.css?v=29" />
+    <link rel="stylesheet" href="./spinner.css?v=33" />
     <style>
       * {
         box-sizing: border-box;
@@ -22,181 +22,87 @@
         font-family: "Segoe UI", "Switzer", system-ui, sans-serif;
         color: #1a1a1a;
         background:
-          radial-gradient(ellipse 80% 50% at 50% -10%, #ffe0cc 0%, transparent 55%),
-          linear-gradient(180deg, #fff4ec 0%, #ffffff 42%, #fff8f3 100%);
+          radial-gradient(ellipse 70% 40% at 50% 0%, #ffe4d4 0%, transparent 55%),
+          #fff8f3;
       }
 
       main {
-        max-width: 980px;
+        max-width: 720px;
         margin: 0 auto;
-        padding: 40px 20px 72px;
-        display: grid;
-        gap: 20px;
+        padding: 36px 20px 64px;
       }
 
       .intro {
-        display: grid;
-        gap: 8px;
+        margin-bottom: 22px;
       }
 
       .kicker {
-        margin: 0;
-        font-size: 12px;
+        margin: 0 0 6px;
+        font-size: 11px;
         font-weight: 700;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #ff8b61;
+        color: #ff6a33;
       }
 
       h1 {
-        margin: 0;
-        font-size: clamp(26px, 4.5vw, 36px);
+        margin: 0 0 6px;
+        font-size: clamp(24px, 4vw, 32px);
         letter-spacing: -0.04em;
         line-height: 1.15;
       }
 
       .lede {
         margin: 0;
-        max-width: 62ch;
         color: #6b6560;
-        line-height: 1.5;
-        font-size: 15px;
+        line-height: 1.45;
+        font-size: 14px;
       }
 
-      .workspace {
-        display: grid;
-        gap: 16px;
-        grid-template-columns: 1fr;
-        align-items: stretch;
-      }
-
-      @media (min-width: 860px) {
-        .workspace {
-          grid-template-columns: 1.05fr 0.95fr;
-        }
-      }
-
-      .card {
+      .panel {
         background: #fff;
         border: 1px solid #ead9cc;
-        border-radius: 16px;
-        padding: 18px 20px;
+        border-radius: 18px;
+        overflow: hidden;
       }
 
-      .card h2 {
-        margin: 0 0 14px;
-        font-size: 14px;
-        font-weight: 700;
-        letter-spacing: -0.01em;
+      .preview {
+        display: grid;
+        place-items: center;
+        padding: 40px 24px 28px;
+        text-align: center;
+        background:
+          radial-gradient(circle at 50% 40%, #fff4ec 0%, transparent 60%);
       }
 
-      .card-head {
+      .preview p {
+        margin: 12px 0 0;
+        font-size: 13px;
+        color: #6b6560;
+      }
+
+      .setup {
+        border-top: 1px solid #ead9cc;
+        padding: 18px 20px 20px;
+      }
+
+      .setup-head {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
+        gap: 10px;
         margin-bottom: 14px;
       }
 
-      .card-head h2 {
+      .setup-head h2 {
         margin: 0;
-      }
-
-      .stage {
-        display: grid;
-        place-items: center;
-        min-height: 300px;
-        padding: 28px 20px;
-        text-align: center;
-      }
-
-      .stage-copy {
-        margin: 14px 0 0;
         font-size: 13px;
-        color: #6b6560;
-      }
-
-      .stage-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: center;
-        margin-top: 18px;
-      }
-
-      .gallery {
-        display: grid;
-        gap: 16px;
-        grid-template-columns: 1fr;
-      }
-
-      @media (min-width: 720px) {
-        .gallery {
-          grid-template-columns: 1.2fr 1fr 0.9fr;
-        }
-      }
-
-      .row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 18px 22px;
-        align-items: end;
-      }
-
-      .size {
-        display: grid;
-        gap: 8px;
-        justify-items: center;
-        font-size: 12px;
-        color: #6b6560;
-      }
-
-      .loading-row {
-        display: flex;
-        gap: 16px;
-        align-items: center;
-        min-height: 72px;
-      }
-
-      .dark {
-        background: #1a1a1a;
-        color: #f5f5f5;
-        border-color: #333;
-      }
-
-      .dark h2,
-      .dark .size,
-      .dark .stage-copy {
-        color: #cacaca;
-      }
-
-      button {
-        appearance: none;
-        border: 0;
-        border-radius: 999px;
-        height: 36px;
-        padding: 0 14px;
-        background: #ff8b61;
-        color: #fff;
         font-weight: 700;
-        font-size: 13px;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
+      }
+
+      .setup-actions {
+        display: flex;
         gap: 8px;
-      }
-
-      button.ghost {
-        background: #fff;
-        color: #1a1a1a;
-        border: 1px solid #ead9cc;
-      }
-
-      .card-head .ghost {
-        height: 28px;
-        padding: 0 10px;
-        font-size: 11px;
-        font-weight: 600;
       }
 
       .controls {
@@ -206,38 +112,26 @@
 
       .control {
         display: grid;
-        grid-template-columns: minmax(108px, 132px) 1fr auto;
+        grid-template-columns: 110px 1fr 52px;
         align-items: center;
-        gap: 8px 12px;
+        gap: 10px;
       }
 
       .control-label {
         font-size: 12px;
         color: #6b6560;
-        white-space: nowrap;
       }
 
       .control strong {
-        min-width: 4.6rem;
         text-align: right;
         font-size: 12px;
-        color: #1a1a1a;
         font-variant-numeric: tabular-nums;
-        white-space: nowrap;
       }
 
       .control input[type="range"] {
         width: 100%;
-        height: 18px;
         margin: 0;
-        accent-color: #ff8b61;
-      }
-
-      .control-hint {
-        margin: 2px 0 0;
-        font-size: 11px;
-        color: #6b6560;
-        line-height: 1.45;
+        accent-color: #ff6a33;
       }
 
       .swatches {
@@ -248,8 +142,8 @@
       }
 
       .swatch {
-        width: 22px;
-        height: 22px;
+        width: 20px;
+        height: 20px;
         border-radius: 999px;
         border: 2px solid #fff;
         box-shadow: 0 0 0 1px #ead9cc;
@@ -263,11 +157,11 @@
       }
 
       .color-pick {
-        width: 28px;
-        height: 28px;
+        width: 26px;
+        height: 26px;
         padding: 0;
         border: 1px solid #ead9cc;
-        border-radius: 8px;
+        border-radius: 7px;
         background: #fff;
         cursor: pointer;
       }
@@ -278,24 +172,91 @@
 
       .color-pick::-webkit-color-swatch {
         border: 0;
-        border-radius: 5px;
+        border-radius: 4px;
       }
 
-      .accent-hex {
-        min-width: 4.8rem;
+      .examples {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1px;
+        background: #ead9cc;
+        border: 1px solid #ead9cc;
+        border-radius: 18px;
+        overflow: hidden;
+      }
+
+      @media (min-width: 640px) {
+        .examples {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .examples .example.sizes-panel {
+          grid-column: 1 / -1;
+        }
+      }
+
+      .example {
+        background: #fff;
+        padding: 16px 18px;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .example h2 {
+        margin: 0 0 14px;
         font-size: 12px;
-        font-variant-numeric: tabular-nums;
-        color: #1a1a1a;
+        font-weight: 700;
+        color: #6b6560;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      .example-body {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .example-body.sizes {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        align-items: end;
+        justify-items: center;
+        gap: 12px 8px;
+        width: 100%;
+      }
+
+      .size {
+        display: grid;
+        gap: 8px;
+        justify-items: center;
+        align-content: end;
+        font-size: 11px;
+        color: #6b6560;
+        width: 100%;
+      }
+
+      .example.dark {
+        background: #1a1a1a;
+      }
+
+      .example.dark h2 {
+        color: #9a9a9a;
       }
 
       .skeleton {
-        display: grid;
-        gap: 10px;
         flex: 1;
+        display: grid;
+        gap: 8px;
+        min-width: 80px;
       }
 
       .bar {
-        height: 10px;
+        height: 8px;
         border-radius: 999px;
         background: linear-gradient(90deg, #ffe8d6, #fff, #ffe8d6);
         background-size: 200% 100%;
@@ -308,10 +269,32 @@
         }
       }
 
+      button {
+        appearance: none;
+        border: 0;
+        border-radius: 999px;
+        height: 30px;
+        padding: 0 12px;
+        background: #ff6a33;
+        color: #fff;
+        font-weight: 700;
+        font-size: 12px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      button.ghost {
+        background: #fff;
+        color: #1a1a1a;
+        border: 1px solid #ead9cc;
+      }
+
       .overlay {
         position: fixed;
         inset: 0;
-        background: color-mix(in srgb, #fff4ec 88%, white);
+        background: color-mix(in srgb, #fff4ec 90%, white);
         display: none;
         place-items: center;
         z-index: 20;
@@ -321,20 +304,27 @@
         display: grid;
       }
 
-      footer {
-        margin-top: 8px;
+      .overlay p {
+        margin: 12px 0 0;
         font-size: 13px;
+        color: #6b6560;
+        text-align: center;
+      }
+
+      footer {
+        margin-top: 18px;
+        font-size: 12px;
         color: #6b6560;
         line-height: 1.5;
       }
 
       a {
-        color: #ff8b61;
+        color: #ff6a33;
       }
 
-      @media (max-width: 560px) {
+      @media (max-width: 520px) {
         .control {
-          grid-template-columns: 1fr auto;
+          grid-template-columns: 1fr 52px;
         }
 
         .control-label {
@@ -345,146 +335,108 @@
   </head>
   <body>
     <div class="overlay is-on" id="overlay">
-      <div style="text-align: center">
+      <div>
         <span data-gl-spinner data-size="xl" aria-label="Loading Portal"></span>
-        <p class="stage-copy">Loading Portal…</p>
+        <p>Loading Portal…</p>
       </div>
     </div>
 
     <main>
       <header class="intro">
         <p class="kicker">GenLayer Portal · Spinner</p>
-        <h1>Neon edge sweep with soft glow</h1>
+        <h1>Neon edge sweep</h1>
         <p class="lede">
-          Official Portal mark, synchronized wing streak, and a soft diamond blink.
-          Tune speed and accent live — then drop it into any loading state.
+          Official Portal mark. Soft glow on both wings, gentle diamond blink.
         </p>
       </header>
 
-      <section class="workspace">
-        <article class="card stage">
-          <div>
-            <span data-gl-spinner data-size="xl" aria-label="Spinner preview"></span>
-            <p class="stage-copy">Reaching consensus…</p>
-            <div class="stage-actions">
+      <section class="panel">
+        <div class="preview">
+          <span data-gl-spinner data-size="xl" aria-label="Spinner preview"></span>
+          <p>Reaching consensus…</p>
+        </div>
+
+        <div class="setup">
+          <div class="setup-head">
+            <h2>Setup</h2>
+            <div class="setup-actions">
+              <button type="button" class="ghost" id="reset-speed">Reset</button>
               <button type="button" id="replay">
                 <span data-gl-spinner data-size="sm" aria-hidden="true"></span>
-                Replay load
+                Replay
               </button>
-              <a class="ghost" href="./spinner.css" style="display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:999px;border:1px solid #ead9cc;text-decoration:none;color:#1a1a1a;font-size:13px;font-weight:600;background:#fff">spinner.css</a>
             </div>
           </div>
-        </article>
 
-        <article class="card">
-          <div class="card-head">
-            <h2>Setup</h2>
-            <button type="button" class="ghost" id="reset-speed">Reset</button>
-          </div>
           <div class="controls">
             <label class="control">
               <span class="control-label">Edge sweep</span>
-              <input
-                id="sweep-speed"
-                type="range"
-                min="1"
-                max="15"
-                step="0.1"
-                value="4.2"
-              />
+              <input id="sweep-speed" type="range" min="1" max="15" step="0.1" value="4.2" />
               <strong><span id="sweep-val">4.2</span>s</strong>
             </label>
             <label class="control">
               <span class="control-label">Diamond blink</span>
-              <input
-                id="diamond-speed"
-                type="range"
-                min="0.4"
-                max="6"
-                step="0.05"
-                value="1.55"
-              />
+              <input id="diamond-speed" type="range" min="0.4" max="6" step="0.05" value="1.55" />
               <strong><span id="diamond-val">1.55</span>s</strong>
             </label>
             <div class="control">
-              <span class="control-label">Accent color</span>
+              <span class="control-label">Accent</span>
               <div class="swatches">
-                <button type="button" class="swatch is-on" data-accent="#ff8b61" style="--swatch:#ff8b61" aria-label="Soft orange"></button>
-                <button type="button" class="swatch" data-accent="#ff6a33" style="--swatch:#ff6a33" aria-label="Portal orange"></button>
+                <button type="button" class="swatch is-on" data-accent="#ff6a33" style="--swatch:#ff6a33" aria-label="Portal orange"></button>
+                <button type="button" class="swatch" data-accent="#ff8b61" style="--swatch:#ff8b61" aria-label="Soft orange"></button>
                 <button type="button" class="swatch" data-accent="#2f6bff" style="--swatch:#2f6bff" aria-label="Blue"></button>
                 <button type="button" class="swatch" data-accent="#12b76a" style="--swatch:#12b76a" aria-label="Green"></button>
                 <button type="button" class="swatch" data-accent="#7a5af8" style="--swatch:#7a5af8" aria-label="Violet"></button>
                 <button type="button" class="swatch" data-accent="#f04438" style="--swatch:#f04438" aria-label="Red"></button>
-                <input id="accent-color" class="color-pick" type="color" value="#ff8b61" aria-label="Custom accent" />
+                <input id="accent-color" class="color-pick" type="color" value="#ff6a33" aria-label="Custom accent" />
               </div>
-              <strong class="accent-hex" id="accent-val">#ff8b61</strong>
+              <strong id="accent-val">#ff6a33</strong>
             </div>
-            <p class="control-hint">
-              Applies live ·
-              <code>setSpinnerTiming</code> /
-              <code>setSpinnerAccent</code> ·
-              <code>data-sweep-sec</code> /
-              <code>data-diamond-sec</code> /
-              <code>data-accent</code>
-            </p>
           </div>
-        </article>
+        </div>
       </section>
 
-      <section class="gallery">
-        <article class="card">
+      <section class="examples">
+        <div class="example sizes-panel">
           <h2>Sizes</h2>
-          <div class="row">
-            <div class="size">
-              <span data-gl-spinner data-size="sm"></span>
-              24
-            </div>
-            <div class="size">
-              <span data-gl-spinner data-size="md"></span>
-              48
-            </div>
-            <div class="size">
-              <span data-gl-spinner data-size="lg"></span>
-              72
-            </div>
-            <div class="size">
-              <span data-gl-spinner data-size="xl"></span>
-              128
-            </div>
+          <div class="example-body sizes">
+            <div class="size"><span data-gl-spinner data-size="sm"></span>24</div>
+            <div class="size"><span data-gl-spinner data-size="md"></span>48</div>
+            <div class="size"><span data-gl-spinner data-size="lg"></span>72</div>
+            <div class="size"><span data-gl-spinner data-size="xl"></span>128</div>
           </div>
-        </article>
-
-        <article class="card">
-          <h2>Card loading</h2>
-          <div class="loading-row">
+        </div>
+        <div class="example">
+          <h2>Loading</h2>
+          <div class="example-body">
             <span data-gl-spinner data-size="md"></span>
             <div class="skeleton">
               <div class="bar"></div>
-              <div class="bar" style="width: 70%"></div>
-              <div class="bar" style="width: 52%"></div>
+              <div class="bar" style="width: 72%"></div>
+              <div class="bar" style="width: 48%"></div>
             </div>
           </div>
-        </article>
-
-        <article class="card dark">
+        </div>
+        <div class="example dark">
           <h2>On dark</h2>
-          <div class="row">
+          <div class="example-body">
             <span data-gl-spinner data-size="lg" data-tone="on-dark"></span>
             <span data-gl-spinner data-size="md" data-tone="on-dark"></span>
           </div>
-        </article>
+        </div>
       </section>
 
       <footer>
-        Mark cropped from
+        Mark from
         <a href="https://portal.genlayer.foundation/assets/genlayer-portal-logo.svg"
           >genlayer-portal-logo.svg</a
-        >.
-        Wings stay fixed; accent defaults to <code>#ff8b61</code>.
+        >
+        · <a href="./spinner.css">spinner.css</a>
+        · <a href="./spinner.js">spinner.js</a>
       </footer>
     </main>
 
-    <script type="module" src="./spinner.js?v=29"></script>
+    <script type="module" src="./spinner.js?v=33"></script>
     <script type="module">
       const overlay = document.getElementById("overlay");
       const sweepInput = document.getElementById("sweep-speed");
@@ -494,7 +446,7 @@
       const diamondVal = document.getElementById("diamond-val");
       const accentVal = document.getElementById("accent-val");
       const swatches = [...document.querySelectorAll(".swatch[data-accent]")];
-      const DEFAULTS = { sweepSec: 4.2, diamondSec: 1.55, accent: "#ff8b61" };
+      const DEFAULTS = { sweepSec: 4.2, diamondSec: 1.55, accent: "#ff6a33" };
 
       const fmt = (n) =>
         Number.isInteger(n)
