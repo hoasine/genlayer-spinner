@@ -1,0 +1,73 @@
+:root {
+  --vo-void: #1a1a1a;
+  --vo-accent: #ff6a33;
+  --vo-accent-rgb: 255, 106, 51;
+}
+
+.vo-spinner {
+  --size: 48px;
+  --dot: 3.2px;
+  --orbit: 18%;
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  display: inline-grid;
+  place-items: center;
+  color: var(--vo-void);
+  overflow: visible;
+}
+
+.vo-spinner[data-size="sm"] {
+  --size: 24px;
+  --dot: 2.2px;
+  --orbit: 20%;
+}
+
+.vo-spinner[data-size="md"] {
+  --size: 48px;
+  --dot: 3.2px;
+  --orbit: 18%;
+}
+
+.vo-spinner[data-size="lg"] {
+  --size: 72px;
+  --dot: 4px;
+  --orbit: 17%;
+}
+
+.vo-spinner[data-size="xl"] {
+  --size: 128px;
+  --dot: 5.5px;
+  --orbit: 16%;
+}
+
+.vo-spinner[data-tone="on-dark"] {
+  color: #f5f5f5;
+}
+
+.vo-spinner__mark {
+  width: 78%;
+  height: auto;
+  max-height: 92%;
+  aspect-ratio: 273 / 256;
+  overflow: visible;
+  display: block;
+}
+
+.vo-spinner__wings,
+.vo-spinner__diamond {
+  fill: currentColor;
+}
+
+.vo-spinner__orbit-ring {
+  fill: none;
+  stroke: rgba(var(--vo-accent-rgb), 0.18);
+  stroke-width: 1px;
+  stroke-dasharray: 3 5;
+  vector-effect: non-scaling-stroke;
+}
+
+.vo-spinner__dot {
+  fill: var(--vo-accent);
+  filter: drop-shadow(0 0 3px rgba(var(--vo-accent-rgb), 0.65));
+}

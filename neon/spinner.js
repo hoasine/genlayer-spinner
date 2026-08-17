@@ -207,8 +207,10 @@ export function remountAllSpinners() {
 
 setSpinnerAccent(DEFAULT_ACCENT);
 document.querySelectorAll("[data-gl-spinner]").forEach(renderSpinner);
-window.remountAllSpinners = remountAllSpinners;
-window.setSpinnerTiming = setSpinnerTiming;
-window.setSpinnerAccent = setSpinnerAccent;
-window.spinnerTiming = spinnerTiming;
-window.spinnerTheme = spinnerTheme;
+window.neonSpinner = {
+  remountAllSpinners,
+  setSpinnerTiming,
+  setSpinnerAccent,
+  spinnerTiming,
+  spinnerTheme,
+};
