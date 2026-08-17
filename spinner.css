@@ -1,6 +1,8 @@
 :root {
   --gl-void: #1a1a1a;
-  --gl-orange: #ff6a33;
+  --gl-accent: #ff8b61;
+  --gl-accent-rgb: 255, 139, 97;
+  --gl-orange: var(--gl-accent);
   --gl-peach: #ffe8d6;
   --gl-wash: #fff4ec;
   --gl-paper: #ffffff;
@@ -10,29 +12,55 @@
 
 .gl-spinner {
   --size: 48px;
-  --duration: 1.6s;
+  --stroke: 2.2;
+  --glow-blur: 1px;
+  --glow-halo: 2.5px;
+  --glow-op: 0.42;
+  --core-halo: 1px;
   position: relative;
   width: var(--size);
   height: var(--size);
   display: inline-grid;
   place-items: center;
   color: var(--gl-void);
+  overflow: visible;
 }
 
+/* Glow/blur must scale down with size — fixed px bloom blows out small marks */
 .gl-spinner[data-size="sm"] {
   --size: 24px;
+  --stroke: 1.45;
+  --glow-blur: 0.35px;
+  --glow-halo: 0.8px;
+  --glow-op: 0.32;
+  --core-halo: 0.4px;
 }
 
 .gl-spinner[data-size="md"] {
   --size: 48px;
+  --stroke: 2.1;
+  --glow-blur: 0.9px;
+  --glow-halo: 2.2px;
+  --glow-op: 0.42;
+  --core-halo: 0.9px;
 }
 
 .gl-spinner[data-size="lg"] {
   --size: 72px;
+  --stroke: 2.45;
+  --glow-blur: 1.6px;
+  --glow-halo: 4px;
+  --glow-op: 0.5;
+  --core-halo: 1.5px;
 }
 
 .gl-spinner[data-size="xl"] {
   --size: 128px;
+  --stroke: 2.5;
+  --glow-blur: 2.4px;
+  --glow-halo: 6px;
+  --glow-op: 0.55;
+  --core-halo: 2px;
 }
 
 .gl-spinner[data-tone="on-dark"] {
@@ -41,10 +69,11 @@
 
 .gl-spinner__mark {
   width: 78%;
-  height: 78%;
+  height: auto;
+  max-height: 92%;
+  aspect-ratio: 273 / 256;
   overflow: visible;
   display: block;
-  z-index: 1;
 }
 
 .gl-spinner__wings {
@@ -52,66 +81,27 @@
 }
 
 .gl-spinner__diamond {
-  fill: var(--gl-orange);
-  transform-origin: 136.2px 160.5px;
-  animation: gl-diamond-pulse var(--duration) ease-in-out infinite;
+  fill: currentColor;
 }
 
-.gl-spinner__orbit {
-  position: absolute;
-  inset: 0;
-  animation: gl-orbit-spin 2.4s linear infinite;
+.gl-spinner__sweep,
+.gl-spinner__sweep-glow {
+  fill: none;
+  stroke: var(--gl-accent);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
 
-.gl-spinner__orbit-dot {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 14%;
-  height: 14%;
-  min-width: 5px;
-  min-height: 5px;
-  border-radius: 2px;
-  background: var(--gl-orange);
-  transform: translate(-50%, -10%);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gl-orange) 22%, transparent);
+.gl-spinner__sweep-glow {
+  stroke-width: calc(var(--stroke) * 2.1px);
+  opacity: var(--glow-op);
+  filter: blur(var(--glow-blur))
+    drop-shadow(0 0 var(--glow-halo) rgba(var(--gl-accent-rgb), 0.75));
 }
 
-.gl-spinner[data-size="sm"] .gl-spinner__orbit-dot {
-  border-radius: 1px;
-  box-shadow: none;
-}
-
-@keyframes gl-diamond-pulse {
-  0%,
-  100% {
-    transform: scale(0.86);
-    opacity: 0.55;
-  }
-  50% {
-    transform: scale(1.08);
-    opacity: 1;
-  }
-}
-
-@keyframes gl-orbit-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .gl-spinner__diamond,
-  .gl-spinner__orbit {
-    animation: none;
-  }
-
-  .gl-spinner__diamond {
-    opacity: 1;
-    transform: none;
-  }
-
-  .gl-spinner__orbit-dot {
-    top: 8%;
-  }
+.gl-spinner__sweep {
+  stroke-width: calc(var(--stroke) * 1.1px);
+  opacity: 0.96;
+  filter: drop-shadow(0 0 var(--core-halo) rgba(var(--gl-accent-rgb), 0.55));
 }

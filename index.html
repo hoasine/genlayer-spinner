@@ -6,10 +6,11 @@
     <title>GenLayer Spinner</title>
     <meta
       name="description"
-      content="Portal-ready GenLayer loading spinner: official mark, orange diamond pulse, quorum orbit."
+      content="Portal-ready GenLayer loading spinner: official mark, orange neon glow, soft diamond blink."
     />
     <link rel="icon" href="./mark.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./spinner.css" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <link rel="stylesheet" href="./spinner.css?v=29" />
     <style>
       * {
         box-sizing: border-box;
@@ -26,72 +27,52 @@
       }
 
       main {
-        max-width: 920px;
+        max-width: 980px;
         margin: 0 auto;
-        padding: 48px 20px 80px;
+        padding: 40px 20px 72px;
+        display: grid;
+        gap: 20px;
+      }
+
+      .intro {
+        display: grid;
+        gap: 8px;
       }
 
       .kicker {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
+        margin: 0;
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: #ff6a33;
+        color: #ff8b61;
       }
 
       h1 {
-        margin: 10px 0 8px;
-        font-size: clamp(28px, 5vw, 42px);
+        margin: 0;
+        font-size: clamp(26px, 4.5vw, 36px);
         letter-spacing: -0.04em;
+        line-height: 1.15;
       }
 
       .lede {
-        max-width: 58ch;
+        margin: 0;
+        max-width: 62ch;
         color: #6b6560;
         line-height: 1.5;
+        font-size: 15px;
       }
 
-      .hero {
-        display: grid;
-        gap: 28px;
-        grid-template-columns: 1fr;
-        align-items: center;
-        margin-bottom: 40px;
-      }
-
-      @media (min-width: 800px) {
-        .hero {
-          grid-template-columns: 1.2fr 0.8fr;
-        }
-      }
-
-      .stage {
-        display: grid;
-        place-items: center;
-        min-height: 260px;
-        background: #fff;
-        border: 1px solid #ead9cc;
-        border-radius: 20px;
-        box-shadow: 0 18px 40px -28px rgba(80, 40, 10, 0.35);
-      }
-
-      .stage-copy {
-        margin-top: 16px;
-        font-size: 13px;
-        color: #6b6560;
-      }
-
-      .grid {
+      .workspace {
         display: grid;
         gap: 16px;
+        grid-template-columns: 1fr;
+        align-items: stretch;
       }
 
-      @media (min-width: 700px) {
-        .grid.two {
-          grid-template-columns: 1fr 1fr;
+      @media (min-width: 860px) {
+        .workspace {
+          grid-template-columns: 1.05fr 0.95fr;
         }
       }
 
@@ -99,18 +80,66 @@
         background: #fff;
         border: 1px solid #ead9cc;
         border-radius: 16px;
-        padding: 20px;
+        padding: 18px 20px;
       }
 
       .card h2 {
         margin: 0 0 14px;
-        font-size: 15px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .card-head h2 {
+        margin: 0;
+      }
+
+      .stage {
+        display: grid;
+        place-items: center;
+        min-height: 300px;
+        padding: 28px 20px;
+        text-align: center;
+      }
+
+      .stage-copy {
+        margin: 14px 0 0;
+        font-size: 13px;
+        color: #6b6560;
+      }
+
+      .stage-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 18px;
+      }
+
+      .gallery {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1fr;
+      }
+
+      @media (min-width: 720px) {
+        .gallery {
+          grid-template-columns: 1.2fr 1fr 0.9fr;
+        }
       }
 
       .row {
         display: flex;
         flex-wrap: wrap;
-        gap: 22px;
+        gap: 18px 22px;
         align-items: end;
       }
 
@@ -122,25 +151,11 @@
         color: #6b6560;
       }
 
-      button {
-        appearance: none;
-        border: 0;
-        border-radius: 999px;
-        height: 40px;
-        padding: 0 16px;
-        background: #ff6a33;
-        color: #fff;
-        font-weight: 700;
-        cursor: pointer;
-        display: inline-flex;
+      .loading-row {
+        display: flex;
+        gap: 16px;
         align-items: center;
-        gap: 10px;
-      }
-
-      button.ghost {
-        background: #fff;
-        color: #1a1a1a;
-        border: 1px solid #ead9cc;
+        min-height: 72px;
       }
 
       .dark {
@@ -150,26 +165,133 @@
       }
 
       .dark h2,
-      .dark .size {
+      .dark .size,
+      .dark .stage-copy {
         color: #cacaca;
       }
 
-      .overlay {
-        position: fixed;
-        inset: 0;
-        background: color-mix(in srgb, #fff4ec 88%, white);
-        display: none;
-        place-items: center;
-        z-index: 20;
+      button {
+        appearance: none;
+        border: 0;
+        border-radius: 999px;
+        height: 36px;
+        padding: 0 14px;
+        background: #ff8b61;
+        color: #fff;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
       }
 
-      .overlay.is-on {
+      button.ghost {
+        background: #fff;
+        color: #1a1a1a;
+        border: 1px solid #ead9cc;
+      }
+
+      .card-head .ghost {
+        height: 28px;
+        padding: 0 10px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .controls {
         display: grid;
+        gap: 12px;
+      }
+
+      .control {
+        display: grid;
+        grid-template-columns: minmax(108px, 132px) 1fr auto;
+        align-items: center;
+        gap: 8px 12px;
+      }
+
+      .control-label {
+        font-size: 12px;
+        color: #6b6560;
+        white-space: nowrap;
+      }
+
+      .control strong {
+        min-width: 4.6rem;
+        text-align: right;
+        font-size: 12px;
+        color: #1a1a1a;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+
+      .control input[type="range"] {
+        width: 100%;
+        height: 18px;
+        margin: 0;
+        accent-color: #ff8b61;
+      }
+
+      .control-hint {
+        margin: 2px 0 0;
+        font-size: 11px;
+        color: #6b6560;
+        line-height: 1.45;
+      }
+
+      .swatches {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .swatch {
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px #ead9cc;
+        padding: 0;
+        cursor: pointer;
+        background: var(--swatch);
+      }
+
+      .swatch.is-on {
+        box-shadow: 0 0 0 2px #1a1a1a;
+      }
+
+      .color-pick {
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: 1px solid #ead9cc;
+        border-radius: 8px;
+        background: #fff;
+        cursor: pointer;
+      }
+
+      .color-pick::-webkit-color-swatch-wrapper {
+        padding: 2px;
+      }
+
+      .color-pick::-webkit-color-swatch {
+        border: 0;
+        border-radius: 5px;
+      }
+
+      .accent-hex {
+        min-width: 4.8rem;
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+        color: #1a1a1a;
       }
 
       .skeleton {
         display: grid;
         gap: 10px;
+        flex: 1;
       }
 
       .bar {
@@ -186,14 +308,38 @@
         }
       }
 
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: color-mix(in srgb, #fff4ec 88%, white);
+        display: none;
+        place-items: center;
+        z-index: 20;
+      }
+
+      .overlay.is-on {
+        display: grid;
+      }
+
       footer {
-        margin-top: 36px;
+        margin-top: 8px;
         font-size: 13px;
         color: #6b6560;
+        line-height: 1.5;
       }
 
       a {
-        color: #ff6a33;
+        color: #ff8b61;
+      }
+
+      @media (max-width: 560px) {
+        .control {
+          grid-template-columns: 1fr auto;
+        }
+
+        .control-label {
+          grid-column: 1 / -1;
+        }
       }
     </style>
   </head>
@@ -206,32 +352,86 @@
     </div>
 
     <main>
-      <section class="hero">
-        <div>
-          <p class="kicker">GenLayer Portal · Spinner</p>
-          <h1>Official mark. Orange pulse. Quorum orbit.</h1>
-          <p class="lede">
-            A loading spinner built from the Portal logo paths: wings stay still, the
-            diamond breathes in Portal orange, and a square ticks around the mark like
-            validators reaching quorum.
-          </p>
-          <p style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px">
-            <button type="button" id="replay">
-              <span data-gl-spinner data-size="sm" aria-hidden="true"></span>
-              Replay full-page load
-            </button>
-            <a href="./spinner.css">spinner.css</a>
-          </p>
-        </div>
-        <div class="stage">
-          <div style="text-align: center">
+      <header class="intro">
+        <p class="kicker">GenLayer Portal · Spinner</p>
+        <h1>Neon edge sweep with soft glow</h1>
+        <p class="lede">
+          Official Portal mark, synchronized wing streak, and a soft diamond blink.
+          Tune speed and accent live — then drop it into any loading state.
+        </p>
+      </header>
+
+      <section class="workspace">
+        <article class="card stage">
+          <div>
             <span data-gl-spinner data-size="xl" aria-label="Spinner preview"></span>
             <p class="stage-copy">Reaching consensus…</p>
+            <div class="stage-actions">
+              <button type="button" id="replay">
+                <span data-gl-spinner data-size="sm" aria-hidden="true"></span>
+                Replay load
+              </button>
+              <a class="ghost" href="./spinner.css" style="display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:999px;border:1px solid #ead9cc;text-decoration:none;color:#1a1a1a;font-size:13px;font-weight:600;background:#fff">spinner.css</a>
+            </div>
           </div>
-        </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h2>Setup</h2>
+            <button type="button" class="ghost" id="reset-speed">Reset</button>
+          </div>
+          <div class="controls">
+            <label class="control">
+              <span class="control-label">Edge sweep</span>
+              <input
+                id="sweep-speed"
+                type="range"
+                min="1"
+                max="15"
+                step="0.1"
+                value="4.2"
+              />
+              <strong><span id="sweep-val">4.2</span>s</strong>
+            </label>
+            <label class="control">
+              <span class="control-label">Diamond blink</span>
+              <input
+                id="diamond-speed"
+                type="range"
+                min="0.4"
+                max="6"
+                step="0.05"
+                value="1.55"
+              />
+              <strong><span id="diamond-val">1.55</span>s</strong>
+            </label>
+            <div class="control">
+              <span class="control-label">Accent color</span>
+              <div class="swatches">
+                <button type="button" class="swatch is-on" data-accent="#ff8b61" style="--swatch:#ff8b61" aria-label="Soft orange"></button>
+                <button type="button" class="swatch" data-accent="#ff6a33" style="--swatch:#ff6a33" aria-label="Portal orange"></button>
+                <button type="button" class="swatch" data-accent="#2f6bff" style="--swatch:#2f6bff" aria-label="Blue"></button>
+                <button type="button" class="swatch" data-accent="#12b76a" style="--swatch:#12b76a" aria-label="Green"></button>
+                <button type="button" class="swatch" data-accent="#7a5af8" style="--swatch:#7a5af8" aria-label="Violet"></button>
+                <button type="button" class="swatch" data-accent="#f04438" style="--swatch:#f04438" aria-label="Red"></button>
+                <input id="accent-color" class="color-pick" type="color" value="#ff8b61" aria-label="Custom accent" />
+              </div>
+              <strong class="accent-hex" id="accent-val">#ff8b61</strong>
+            </div>
+            <p class="control-hint">
+              Applies live ·
+              <code>setSpinnerTiming</code> /
+              <code>setSpinnerAccent</code> ·
+              <code>data-sweep-sec</code> /
+              <code>data-diamond-sec</code> /
+              <code>data-accent</code>
+            </p>
+          </div>
+        </article>
       </section>
 
-      <div class="grid two">
+      <section class="gallery">
         <article class="card">
           <h2>Sizes</h2>
           <div class="row">
@@ -255,22 +455,10 @@
         </article>
 
         <article class="card">
-          <h2>In a button</h2>
-          <button type="button">
-            <span data-gl-spinner data-size="sm" aria-hidden="true"></span>
-            Submitting…
-          </button>
-          <button class="ghost" type="button" style="margin-left: 8px">
-            <span data-gl-spinner data-size="sm" aria-hidden="true"></span>
-            Saving
-          </button>
-        </article>
-
-        <article class="card">
-          <h2>Card loading state</h2>
-          <div style="display: flex; gap: 16px; align-items: center">
+          <h2>Card loading</h2>
+          <div class="loading-row">
             <span data-gl-spinner data-size="md"></span>
-            <div class="skeleton" style="flex: 1">
+            <div class="skeleton">
               <div class="bar"></div>
               <div class="bar" style="width: 70%"></div>
               <div class="bar" style="width: 52%"></div>
@@ -285,25 +473,88 @@
             <span data-gl-spinner data-size="md" data-tone="on-dark"></span>
           </div>
         </article>
-      </div>
+      </section>
 
       <footer>
         Mark cropped from
         <a href="https://portal.genlayer.foundation/assets/genlayer-portal-logo.svg"
           >genlayer-portal-logo.svg</a
         >.
-        Wings are not rotated. Accent matches Portal orange.
+        Wings stay fixed; accent defaults to <code>#ff8b61</code>.
       </footer>
     </main>
 
-    <script type="module" src="./spinner.js"></script>
+    <script type="module" src="./spinner.js?v=29"></script>
     <script type="module">
       const overlay = document.getElementById("overlay");
+      const sweepInput = document.getElementById("sweep-speed");
+      const diamondInput = document.getElementById("diamond-speed");
+      const accentInput = document.getElementById("accent-color");
+      const sweepVal = document.getElementById("sweep-val");
+      const diamondVal = document.getElementById("diamond-val");
+      const accentVal = document.getElementById("accent-val");
+      const swatches = [...document.querySelectorAll(".swatch[data-accent]")];
+      const DEFAULTS = { sweepSec: 4.2, diamondSec: 1.55, accent: "#ff8b61" };
+
+      const fmt = (n) =>
+        Number.isInteger(n)
+          ? String(n)
+          : n.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
+
+      function syncSwatches(hex) {
+        swatches.forEach((btn) => {
+          btn.classList.toggle(
+            "is-on",
+            btn.getAttribute("data-accent").toLowerCase() === hex.toLowerCase()
+          );
+        });
+      }
+
+      function applySpeed() {
+        const sweepSec = Number(sweepInput.value);
+        const diamondSec = Number(diamondInput.value);
+        sweepVal.textContent = fmt(sweepSec);
+        diamondVal.textContent = fmt(diamondSec);
+        if (typeof window.setSpinnerTiming === "function") {
+          window.setSpinnerTiming({ sweepSec, diamondSec });
+        }
+      }
+
+      function applyAccent(hex) {
+        const next =
+          typeof window.setSpinnerAccent === "function"
+            ? window.setSpinnerAccent(hex)
+            : hex;
+        accentInput.value = next;
+        accentVal.textContent = next;
+        syncSwatches(next);
+      }
+
+      sweepInput.addEventListener("input", applySpeed);
+      diamondInput.addEventListener("input", applySpeed);
+      accentInput.addEventListener("input", () => applyAccent(accentInput.value));
+      swatches.forEach((btn) => {
+        btn.addEventListener("click", () =>
+          applyAccent(btn.getAttribute("data-accent"))
+        );
+      });
+      document.getElementById("reset-speed").addEventListener("click", () => {
+        sweepInput.value = String(DEFAULTS.sweepSec);
+        diamondInput.value = String(DEFAULTS.diamondSec);
+        applySpeed();
+        applyAccent(DEFAULTS.accent);
+      });
+      applySpeed();
+      applyAccent(DEFAULTS.accent);
+
       const hide = () => overlay.classList.remove("is-on");
-      window.setTimeout(hide, 2200);
+      window.setTimeout(hide, 2400);
       document.getElementById("replay").addEventListener("click", () => {
+        if (typeof window.remountAllSpinners === "function") {
+          window.remountAllSpinners();
+        }
         overlay.classList.add("is-on");
-        window.setTimeout(hide, 2200);
+        window.setTimeout(hide, 2400);
       });
     </script>
   </body>
