@@ -6,7 +6,9 @@ The mark is cropped from the official Portal logo (`genlayer-portal-logo.svg`): 
 
 ## Live
 
-After deploy, this page is the live demo: open `/` and the spinner runs in a full-page loading state, then in button / card / size examples.
+https://genlayer-spinner-sigma.vercel.app
+
+The page opens on a full-page loading state, then shows the spinner in button, card, and size examples.
 
 ## Use
 
